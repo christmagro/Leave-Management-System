@@ -11,7 +11,6 @@
 
     <mvc:annotation-driven />
     <mvc:default-servlet-handler/>
-    <context:component-scan base-package="com.yobetit.test" use-default-filters="false">
-        <context:include-filter expression="org.springframework.stereotype.Controller" type="annotation"/>
-    </context:component-scan>
+    <context:component-scan base-package="com.yobetit.test"/>
+
 </beans>

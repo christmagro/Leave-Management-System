@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 public class HelloServiceImpl implements HelloService {
 
     @Value("${yobetittest.max.leave.days.peremployee}")
-    private  int totalLeaveDaysAllowed;
+    private  String totalLeaveDaysAllowed;
 
     protected int getTotalLeaveDaysAllowed() {
-        return totalLeaveDaysAllowed;
+        return Integer.parseInt(totalLeaveDaysAllowed);
     }
 
     @Override
