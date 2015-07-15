@@ -12,5 +12,6 @@
     <mvc:annotation-driven />
     <mvc:default-servlet-handler/>
     <context:component-scan base-package="com.yobetit.test"/>
+    <context:property-placeholder location="classpath:yobetit-general.properties"/>
 
 </beans>
