@@ -4,24 +4,25 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
- * Created by Christian Magro on 12/07/2015.
+ * Created by Christian Magro on 15/07/2015.
  */
 @Entity
-@Table(name = "tbl_LeaveHistory")
+@Table(name = "tbl_leave_history")
 public class LeaveHistoryEntity {
     private int leavehistoryId;
-    private String hours;
-    private Timestamp startDate;
-    private Timestamp endDate;
-    private Timestamp requestDate;
     private Timestamp approvalDate;
-    private EmployeeEntity employee;
-    private StatusEntity status;
-    private ManagerEntity manager;
+    private double hours;
+    private Timestamp requestDate;
+    private Timestamp startDate;
+    private StatusEntity Status;
+    private EmployeeEntity Employee;
+    private ManagerEntity Manager;
+    private Byte leaveCancelled;
+
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    @Column(name = "leavehistoryId", nullable = false, insertable = true, updatable = true)
+    @Column(name = "leavehistory_id", nullable = false, insertable = true, updatable = true)
     public int getLeavehistoryId() {
         return leavehistoryId;
     }
@@ -31,37 +32,27 @@ public class LeaveHistoryEntity {
     }
 
     @Basic
+    @Column(name = "approval_date", nullable = true, insertable = true, updatable = true)
+    public Timestamp getApprovalDate() {
+        return approvalDate;
+    }
+
+    public void setApprovalDate(Timestamp approvalDate) {
+        this.approvalDate = approvalDate;
+    }
+
+    @Basic
     @Column(name = "hours", nullable = true, insertable = true, updatable = true, length = 45)
-    public String getHours() {
+    public double getHours() {
         return hours;
     }
 
-    public void setHours(String hours) {
+    public void setHours(double hours) {
         this.hours = hours;
     }
 
     @Basic
-    @Column(name = "startDate", nullable = false, insertable = true, updatable = true)
-    public Timestamp getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Timestamp startDate) {
-        this.startDate = startDate;
-    }
-
-    @Basic
-    @Column(name = "endDate", nullable = false, insertable = true, updatable = true)
-    public Timestamp getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Timestamp endDate) {
-        this.endDate = endDate;
-    }
-
-    @Basic
-    @Column(name = "requestDate", nullable = false, insertable = true, updatable = true)
+    @Column(name = "request_date", nullable = false, insertable = true, updatable = true)
     public Timestamp getRequestDate() {
         return requestDate;
     }
@@ -71,13 +62,40 @@ public class LeaveHistoryEntity {
     }
 
     @Basic
-    @Column(name = "approvalDate", nullable = true, insertable = true, updatable = true)
-    public Timestamp getApprovalDate() {
-        return approvalDate;
+    @Column(name = "start_date", nullable = false, insertable = true, updatable = true)
+    public Timestamp getStartDate() {
+        return startDate;
     }
 
-    public void setApprovalDate(Timestamp approvalDate) {
-        this.approvalDate = approvalDate;
+    public void setStartDate(Timestamp startDate) {
+        this.startDate = startDate;
+    }
+
+    @Basic
+    @Column(name = "leave_cancelled", nullable = true, insertable = true, updatable = true)
+    public Byte getLeaveCancelled() {
+        return leaveCancelled;
+    }
+
+    public void setLeaveCancelled(Byte leaveCancelled) {
+        this.leaveCancelled = leaveCancelled;
+    }
+
+
+
+
+    @Override
+    public String toString() {
+        return "LeaveHistoryEntity{" +
+                "leavehistoryId=" + leavehistoryId +
+                ", approvalDate=" + approvalDate +
+                ", hours='" + hours + '\'' +
+                ", requestDate=" + requestDate +
+                ", startDate=" + startDate +
+                ", Status=" + Status +
+                ", Employee=" + Employee +
+                ", Manager=" + Manager +
+                '}';
     }
 
     @Override
@@ -88,11 +106,9 @@ public class LeaveHistoryEntity {
         LeaveHistoryEntity that = (LeaveHistoryEntity) o;
 
         if (leavehistoryId != that.leavehistoryId) return false;
-        if (hours != null ? !hours.equals(that.hours) : that.hours != null) return false;
-        if (startDate != null ? !startDate.equals(that.startDate) : that.startDate != null) return false;
-        if (endDate != null ? !endDate.equals(that.endDate) : that.endDate != null) return false;
-        if (requestDate != null ? !requestDate.equals(that.requestDate) : that.requestDate != null) return false;
         if (approvalDate != null ? !approvalDate.equals(that.approvalDate) : that.approvalDate != null) return false;
+        if (requestDate != null ? !requestDate.equals(that.requestDate) : that.requestDate != null) return false;
+        if (startDate != null ? !startDate.equals(that.startDate) : that.startDate != null) return false;
 
         return true;
     }
@@ -100,42 +116,41 @@ public class LeaveHistoryEntity {
     @Override
     public int hashCode() {
         int result = leavehistoryId;
-        result = 31 * result + (hours != null ? hours.hashCode() : 0);
-        result = 31 * result + (startDate != null ? startDate.hashCode() : 0);
-        result = 31 * result + (endDate != null ? endDate.hashCode() : 0);
-        result = 31 * result + (requestDate != null ? requestDate.hashCode() : 0);
         result = 31 * result + (approvalDate != null ? approvalDate.hashCode() : 0);
+        result = 31 * result + (requestDate != null ? requestDate.hashCode() : 0);
+        result = 31 * result + (startDate != null ? startDate.hashCode() : 0);
+
         return result;
     }
 
     @ManyToOne
-    @JoinColumn(name = "employeeId", referencedColumnName = "employeeId", nullable = false)
+    @JoinColumn(name = "employee_id", referencedColumnName = "employee_id", nullable = false)
     public EmployeeEntity getEmployee() {
-        return employee;
+        return Employee;
     }
 
-    public void setEmployee(EmployeeEntity employee) {
-        this.employee = employee;
+    public void setEmployee(EmployeeEntity tblEmployeeByEmployeeId) {
+        this.Employee = tblEmployeeByEmployeeId;
     }
+
+
     @ManyToOne
-    @JoinColumn(name = "statusId", referencedColumnName = "statusId", nullable = false)
+    @JoinColumn(name = "status_id", referencedColumnName = "status_id", nullable = false)
     public StatusEntity getStatus() {
-        return status;
+        return Status;
     }
 
     public void setStatus(StatusEntity status) {
-        this.status = status;
+        Status = status;
     }
+
     @ManyToOne
-    @JoinColumn(name = "managerId", referencedColumnName = "managerId", nullable = false)
+    @JoinColumn(name = "manager_id", referencedColumnName = "manager_id", nullable = false)
     public ManagerEntity getManager() {
-        return manager;
+        return Manager;
     }
 
     public void setManager(ManagerEntity manager) {
-        this.manager = manager;
+        Manager = manager;
     }
-
-
-
 }

@@ -3,18 +3,18 @@ package com.yobetit.test.entities;
 import javax.persistence.*;
 
 /**
- * Created by Christian Magro on 12/07/2015.
+ * Created by Christian Magro on 15/07/2015.
  */
 @Entity
-@Table(name = "tbl_Manager")
+@Table(name = "tbl_manager")
 public class ManagerEntity {
     private int managerId;
-    private EmployeeEntity employee;
-    private DepartmentEntity department;
+    private EmployeeEntity Employee;
+    private DepartmentEntity Department;
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    @Column(name = "managerId", nullable = false, insertable = true, updatable = true)
+    @Column(name = "manager_id", nullable = false, insertable = true, updatable = true)
     public int getManagerId() {
         return managerId;
     }
@@ -41,24 +41,22 @@ public class ManagerEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "employeeId", referencedColumnName = "employeeId", nullable = false)
+    @JoinColumn(name = "employee_id", referencedColumnName = "employee_id", nullable = false)
     public EmployeeEntity getEmployee() {
-        return employee;
+        return Employee;
     }
 
-    public void setEmployee(EmployeeEntity employee) {
-        this.employee = employee;
+    public void setEmployee(EmployeeEntity tblEmployeeByEmployeeId) {
+        this.Employee = tblEmployeeByEmployeeId;
     }
 
     @ManyToOne
-    @JoinColumn(name = "departmentId", referencedColumnName = "departmentId", nullable = false)
+    @JoinColumn(name = "department_id", referencedColumnName = "department_id", nullable = false)
     public DepartmentEntity getDepartment() {
-        return department;
+        return Department;
     }
 
-    public void setDepartment(DepartmentEntity department) {
-        this.department = department;
+    public void setDepartment(DepartmentEntity tblDepartmentByDepartmentId) {
+        this.Department = tblDepartmentByDepartmentId;
     }
-
-
 }

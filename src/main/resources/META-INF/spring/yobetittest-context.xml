@@ -10,10 +10,22 @@
 						http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
 						http://www.springframework.org/schema/context
 						http://www.springframework.org/schema/context/spring-context-4.1.xsd http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
     <context:spring-configured/>
     <context:annotation-config/>
     <aop:aspectj-autoproxy proxy-target-class="true" />
-    <context:property-placeholder location="classpath:yobetit-*.properties"/>
+    <context:property-placeholder location="classpath:yobetit-database.properties"/>
+
+
+
+    <!--<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">-->
+
+        <!--<property name="location">-->
+            <!--<value>yobetit-*.properties</value>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+
 
     <jpa:repositories base-package="com.yobetit.test.repositories" />
 
@@ -37,8 +49,8 @@
     <bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="${spring.datasource.driver-class-name}" />
         <property name="url" value="${spring.datasource.url}" />
-        <property name="username" value="{spring.datasource.username}" />
-        <property name="password" value="{spring.datasource.password}" />
+        <property name="username" value="${spring.datasource.username}" />
+        <property name="password" value="${spring.datasource.password}" />
     </bean>
 
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
@@ -46,5 +58,5 @@
         <property name="dataSource" ref="dataSource" />
     </bean>
 
-    <tx:annotation-driven/>
+    <tx:annotation-driven />
 </beans>

@@ -1,9 +1,5 @@
 package com.yobetit.test.entities;
 
-
-
-
-
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -11,20 +7,21 @@ import java.util.Collection;
  * Created by Christian Magro on 15/07/2015.
  */
 @Entity
-@Table(name = "tbl_status")
-public class StatusEntity {
-    private int statusId;
+@Table(name = "tbl_groups")
+public class GroupsEntity {
+    private int groupId;
     private String statusName;
-   // private Collection<LeaveHistoryEntity> leaveHistoryEntityList;
+   // private Collection<EmployeeEntity> employeeEntityList;
 
     @Id
-    @Column(name = "status_id", nullable = false, insertable = true, updatable = true)
-    public int getStatusId() {
-        return statusId;
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    @Column(name = "group_id", nullable = false, insertable = true, updatable = true)
+    public int getGroupId() {
+        return groupId;
     }
 
-    public void setStatusId(int statusId) {
-        this.statusId = statusId;
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
     }
 
     @Basic
@@ -42,9 +39,9 @@ public class StatusEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        StatusEntity that = (StatusEntity) o;
+        GroupsEntity that = (GroupsEntity) o;
 
-        if (statusId != that.statusId) return false;
+        if (groupId != that.groupId) return false;
         if (statusName != null ? !statusName.equals(that.statusName) : that.statusName != null) return false;
 
         return true;
@@ -52,7 +49,7 @@ public class StatusEntity {
 
     @Override
     public int hashCode() {
-        int result = statusId;
+        int result = groupId;
         result = 31 * result + (statusName != null ? statusName.hashCode() : 0);
         return result;
     }
