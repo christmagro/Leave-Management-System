@@ -11,8 +11,11 @@
 
     <properties>
         <spring.version>4.1.1.RELEASE</spring.version>
+        <spring.data.version>1.8.1.RELEASE</spring.data.version>
         <jackson.version>1.9.10</jackson.version>
         <jackson.databind-version>2.2.1</jackson.databind-version>
+        <hibernate.version>4.3.5.Final</hibernate.version>
+        <mysql.version>5.1.6</mysql.version>
     </properties>
 
     <dependencies>
@@ -67,11 +70,27 @@
             <artifactId>spring-orm</artifactId>
             <version>${spring.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>${spring.data.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
+
         </dependency>
 
     </dependencies>
