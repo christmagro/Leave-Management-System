@@ -76,4 +76,6 @@ Due to the fact that Spring Security is not implemented current users are set di
 
 This application does not include a front end layer, however backend was designed to easly plug in a front end such as AngularJS.
 
+SQL Script including all tables and data can be found in the project parent folder named YoBetit_Leave_StructureAndData.sql
+
 
