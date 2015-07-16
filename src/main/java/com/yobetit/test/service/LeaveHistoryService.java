@@ -66,7 +66,7 @@ public class LeaveHistoryService {
                 ManagerEntity managerEntity = managerRepository.findOne(leaveHistoryEntity.getManager().getManagerId());
 
                 LeaveHistory leaveHistory = new LeaveHistory();
-
+                leaveHistory.setLeavehistoryId(leaveHistoryEntity.getLeavehistoryId());
                 leaveHistory.setStartDate(leaveHistoryEntity.getStartDate());
                 leaveHistory.setHours(leaveHistoryEntity.getHours());
                 leaveHistory.setApprovalDate(leaveHistoryEntity.getApprovalDate());
@@ -105,7 +105,7 @@ public class LeaveHistoryService {
 
                 LeaveHistory leaveHistory = new LeaveHistory();
 
-
+                leaveHistory.setLeavehistoryId(leaveHistoryEntity.getLeavehistoryId());
                 leaveHistory.setStartDate(leaveHistoryEntity.getStartDate());
                 leaveHistory.setHours(leaveHistoryEntity.getHours());
                 leaveHistory.setApprovalDate(leaveHistoryEntity.getApprovalDate());
@@ -143,7 +143,7 @@ public class LeaveHistoryService {
 
                     LeaveHistory leaveHistory = new LeaveHistory();
 
-
+                    leaveHistory.setLeavehistoryId(leaveHistoryEntity.getLeavehistoryId());
                     leaveHistory.setStartDate(leaveHistoryEntity.getStartDate());
                     leaveHistory.setHours(leaveHistoryEntity.getHours());
                     leaveHistory.setApprovalDate(leaveHistoryEntity.getApprovalDate());
@@ -182,7 +182,7 @@ public class LeaveHistoryService {
 
                 LeaveHistory leaveHistory = new LeaveHistory();
 
-
+                leaveHistory.setLeavehistoryId(leaveHistoryEntity.getLeavehistoryId());
                 leaveHistory.setStartDate(leaveHistoryEntity.getStartDate());
                 leaveHistory.setHours(leaveHistoryEntity.getHours());
                 leaveHistory.setApprovalDate(leaveHistoryEntity.getApprovalDate());
@@ -221,7 +221,7 @@ public class LeaveHistoryService {
 
                     LeaveHistory leaveHistory = new LeaveHistory();
 
-
+                    leaveHistory.setLeavehistoryId(leaveHistoryEntity.getLeavehistoryId());
                     leaveHistory.setStartDate(leaveHistoryEntity.getStartDate());
                     leaveHistory.setHours(leaveHistoryEntity.getHours());
                     leaveHistory.setApprovalDate(leaveHistoryEntity.getApprovalDate());

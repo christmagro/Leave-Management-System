@@ -25,16 +25,6 @@ public class LeaveHistoryController {
     public LeaveHistoryService leaveHistoryService;
 
 
-//    @RequestMapping(value = "/getEmployee/{id}", method = RequestMethod.GET)
-//    public Employee getEmployee(@PathVariable int id) {
-//
-//        log.info("Requesting employee details with id: "+ id);
-//        Employee employee = employeeService.getEmployee(id);
-//
-//        log.info("Response received containing  " + employee.getEmployeeName() + " " + employee.getEmployeeSurname() + " details");
-//        return employee;
-//
-//    }
 
     @RequestMapping(value = "/getAll", method = RequestMethod.GET)
     public List<LeaveHistory> getLeave() {
@@ -60,7 +50,7 @@ public class LeaveHistoryController {
 
         log.info("Requesting list of all leave for employee ");
 
-        return leaveHistoryService.getPassedLeaveByEmployee("foo");
+        return leaveHistoryService.getPassedLeaveByEmployee("jborg");
 
     }
 
@@ -70,7 +60,7 @@ public class LeaveHistoryController {
 
         log.info("Requesting list of all leave for employee ");
 
-        return leaveHistoryService.getFutureLeaveByEmployee("foo");
+        return leaveHistoryService.getFutureLeaveByEmployee("jborg");
 
     }
 
@@ -80,7 +70,7 @@ public class LeaveHistoryController {
 
         log.info("Requesting list of all leave for employee ");
 
-        return leaveHistoryService.getCancelledLeaveByEmployee("foo");
+        return leaveHistoryService.getCancelledLeaveByEmployee("jborg");
 
     }
 
@@ -89,7 +79,7 @@ public class LeaveHistoryController {
 
         log.info("Requesting list of all leave for employee ");
 
-       return leaveHistoryService.getPassedAndOverdueLeaveByEmployee("foo");
+       return leaveHistoryService.getPassedAndOverdueLeaveByEmployee("jborg");
 
     }
 
@@ -98,7 +88,7 @@ public class LeaveHistoryController {
 
         log.info("Request received to add new leave request");
 
-        return leaveHistoryService.addLeave(leaveHistoryEntity, "foo");
+        return leaveHistoryService.addLeave(leaveHistoryEntity, "cmagro");
 
     }
 
@@ -116,7 +106,7 @@ public class LeaveHistoryController {
 
         log.info("Request received to delete leave request");
 
-        return leaveHistoryService.cancelLeave(leaveId, "foo");
+        return leaveHistoryService.cancelLeave(leaveId, "jborg");
 
     }
 }
