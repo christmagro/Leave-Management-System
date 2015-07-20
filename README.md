@@ -72,9 +72,14 @@ Additional Dependecies used:
 * MySql - Requried library to connect with MySQL DB
 * Hibernate - used to translate ORM to SQL 
 
-Due to the fact that Spring Security is not implemented current users are set directly within the controllers (for testing purposes) however once spring security is implemented all user details will be automatically injected.
+Spring Security is implemented with Basic Authentication.
 
-This application does not include a front end layer, however backend was designed to easly plug in a front end such as AngularJS.
+An AngulaJS front-end is also implemented to manage all rest calls and present in an organised and functional portal.
+
+Additional technologies.
+* Bootstrap CSS
+* CSS
+
 
 SQL Script including all tables and data can be found in the project parent folder named YoBetit_Leave_StructureAndData.sql
 
