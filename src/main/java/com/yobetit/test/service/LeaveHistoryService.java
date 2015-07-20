@@ -39,6 +39,9 @@ public class LeaveHistoryService {
     @Value("${initial.status}")
     int initialStatus;
 
+    @Value("${cancelled.status}")
+    int cancelledStatus;
+
     @Value("${yobetittest.hours.perday}")
     int hoursPerDay;
 
@@ -155,6 +158,45 @@ public class LeaveHistoryService {
                 }
             }
             log.info("A total of " + leaveHistoryList.size() + " leave applications were utilized by user: " + username);
+
+            return leaveHistoryList;
+        } catch (Exception e) {
+            log.error("Leave listing for user: " + username + " failed, Exception thrown ", e);
+        }
+
+        return null;
+    }
+
+
+    @Transactional(readOnly = true)
+    public List<LeaveHistory> getActiveLeaveByEmployee(String username) {
+
+        log.info("Received request to return list of utilized leave for user: " + username);
+
+        try {
+            List<LeaveHistory> leaveHistoryList = new ArrayList<LeaveHistory>();
+            EmployeeEntity employeeEntity1 = employeeRepository.findByUsername(username);
+            List<LeaveHistoryEntity> leaveHistoryEntityList = leaveHistoryRepository.findByEmployeeAndLeaveCancelled(employeeEntity1, isNotCancelled);
+            for (LeaveHistoryEntity leaveHistoryEntity : leaveHistoryEntityList) {
+
+                    StatusEntity statusEntity = statusRepository.findOne(leaveHistoryEntity.getStatus().getStatusId());
+                    EmployeeEntity employeeEntity = employeeRepository.findOne(leaveHistoryEntity.getEmployee().getEmployeeId());
+                    ManagerEntity managerEntity = managerRepository.findOne(leaveHistoryEntity.getManager().getManagerId());
+
+                    LeaveHistory leaveHistory = new LeaveHistory();
+
+                    leaveHistory.setLeavehistoryId(leaveHistoryEntity.getLeavehistoryId());
+                    leaveHistory.setStartDate(leaveHistoryEntity.getStartDate());
+                    leaveHistory.setHours(leaveHistoryEntity.getHours());
+                    leaveHistory.setApprovalDate(leaveHistoryEntity.getApprovalDate());
+                    leaveHistory.setRequestDate(leaveHistoryEntity.getRequestDate());
+                    leaveHistory.setEmployee(employeeEntity);
+                    leaveHistory.setStatus(statusEntity);
+                    leaveHistory.setManager(managerEntity);
+                    leaveHistoryList.add(leaveHistory);
+
+            }
+            log.info("A total of " + leaveHistoryList.size() + " leave applications were applied by user: " + username);
 
             return leaveHistoryList;
         } catch (Exception e) {
@@ -295,6 +337,7 @@ public class LeaveHistoryService {
             employeeEntity.setEmployeeBalance(newLeaveBalance);
             employeeRepository.save(employeeEntity);
             leaveHistoryEntity.setLeaveCancelled(isCancelled);
+            leaveHistoryEntity.setStatus(statusRepository.findOne(cancelledStatus));
             leaveHistoryRepository.save(leaveHistoryEntity);
             log.info("LeaveId: " + leaveId + " succesfully deleted for user: " + username);
             return new LeaveResponse(true, newLeaveBalance);
@@ -305,12 +348,12 @@ public class LeaveHistoryService {
     }
 
     @Transactional(readOnly = true)
-    public List<LeaveOverdue> getPassedAndOverdueLeaveByEmployee(String username) {
+    public List<LeaveOverdue> getOverdueLeaveByEmployee(String username) {
 
         log.info("Received request to return list of overdue leave for user: " + username);
         String month = null;
 
-        List<LeaveHistory> leaveHistoryList = getPassedLeaveByEmployee(username);
+        List<LeaveHistory> leaveHistoryList = getActiveLeaveByEmployee(username);
         HashMap<String, Double> overdueMatrix = new HashMap<String, Double>();
 
         for (LeaveHistory leaveHistory : leaveHistoryList) {

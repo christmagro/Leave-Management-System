@@ -1,0 +1,57 @@
+<div class="container">
+    <h1>Create a new Leave Request</h1>
+
+    <form novalidate="novalidate" class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label" for="inputStartDate">Start Date</label>
+
+            <div class="controls">
+                <input type="date" id="inputStartDate" ng-model="leave.startDate" placeholder="Date"/>
+            </div>
+        </div>
+
+
+
+
+        <div class="control-group">
+            <label class="control-label" for="inputLeaveHours">Leave</label>
+
+            <div class="controls">
+                <select id="inputLeaveHours" ng-model="leave.hours" >
+                    <option value="4">Half Day</option>
+                    <option value="8">Full Day</option>
+                    <option value="16">Two Days</option>
+                    <option value="24">Three Day</option>
+                    <option value="32">Four Days</option>
+                    <option value="40">One Week</option>
+                </select>
+
+
+            </div>
+        </div>
+
+
+
+        <!--<div class="control-group">-->
+            <!--<label for="inputStartDate" class="control-label">Leave date:</label>-->
+            <!--<div class="control">-->
+                <!--<input id="inputStartDate" class="form-control" type="date" ng-model="leave.startDate" placeholder="Date"/>-->
+
+                <!--&lt;!&ndash;<input type="text" ng-model="leave.startDate" ng-bind="dateLeave()"><br>&ndash;&gt;-->
+                <!--&lt;!&ndash;<input type="text" id="inputStartDate" ng-model="leave.startDate" placeholder="Date"/>&ndash;&gt;-->
+            <!--</div>-->
+        <!--</div>-->
+
+        <!--Hello {{dateLeave}}-->
+
+
+
+
+
+        <div class="control-group">
+            <div class="controls">
+                <a ng-click="createNewLeave()" class="btn btn-small btn-primary">create new user</a>
+            </div>
+        </div>
+    </form>
+</div>

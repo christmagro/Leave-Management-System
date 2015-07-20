@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 /**
@@ -36,59 +37,59 @@ public class LeaveHistoryController {
     }
 
     @RequestMapping(value = "/getAllByManager", method = RequestMethod.GET)
-    public List<LeaveHistory> getLeaveByManager() {
+    public List<LeaveHistory> getLeaveByManager(Principal principal) {
 
         log.info("Requesting list of all employees ");
 
-        return leaveHistoryService.getLeaveByManager("tmicallef");
+        return leaveHistoryService.getLeaveByManager(principal.getName());
 
     }
 
 
     @RequestMapping(value = "/getPassedLeaveByEmployee", method = RequestMethod.GET)
-        public List<LeaveHistory> getPassedLeaveByEmployee() {
+        public List<LeaveHistory> getPassedLeaveByEmployee(Principal principal) {
 
         log.info("Requesting list of all leave for employee ");
 
-        return leaveHistoryService.getPassedLeaveByEmployee("jborg");
+        return leaveHistoryService.getPassedLeaveByEmployee(principal.getName());
 
     }
 
 
     @RequestMapping(value = "/getFutureLeaveByEmployee", method = RequestMethod.GET)
-    public List<LeaveHistory> getFutureLeaveByEmployee() {
+    public List<LeaveHistory> getFutureLeaveByEmployee(Principal principal) {
 
         log.info("Requesting list of all leave for employee ");
 
-        return leaveHistoryService.getFutureLeaveByEmployee("jborg");
+        return leaveHistoryService.getFutureLeaveByEmployee(principal.getName());
 
     }
 
 
     @RequestMapping(value = "/getCancelledLeaveByEmployee", method = RequestMethod.GET)
-    public List<LeaveHistory> getCancelledLeaveByEmployee() {
+    public List<LeaveHistory> getCancelledLeaveByEmployee(Principal principal) {
 
         log.info("Requesting list of all leave for employee ");
 
-        return leaveHistoryService.getCancelledLeaveByEmployee("jborg");
+        return leaveHistoryService.getCancelledLeaveByEmployee(principal.getName());
 
     }
 
     @RequestMapping(value = "/getOverdueLeaveByEmployee", method = RequestMethod.GET)
-    public List<LeaveOverdue> getOverdueLeaveByEmployee() {
+    public List<LeaveOverdue> getOverdueLeaveByEmployee(Principal principal) {
 
         log.info("Requesting list of all leave for employee ");
 
-       return leaveHistoryService.getPassedAndOverdueLeaveByEmployee("jborg");
+       return leaveHistoryService.getOverdueLeaveByEmployee(principal.getName());
 
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST, consumes = {"application/json"})
-    public LeaveResponse addLeave(@RequestBody LeaveHistoryEntity leaveHistoryEntity) {
+    public LeaveResponse addLeave(@RequestBody LeaveHistoryEntity leaveHistoryEntity, Principal principal) {
 
         log.info("Request received to add new leave request");
 
-        return leaveHistoryService.addLeave(leaveHistoryEntity, "cmagro");
+        return leaveHistoryService.addLeave(leaveHistoryEntity, principal.getName());
 
     }
 
@@ -102,11 +103,11 @@ public class LeaveHistoryController {
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
-    public LeaveResponse addLeave(@PathVariable("id") int leaveId) {
+    public LeaveResponse addLeave(@PathVariable("id") int leaveId, Principal principal) {
 
         log.info("Request received to delete leave request");
 
-        return leaveHistoryService.cancelLeave(leaveId, "jborg");
+        return leaveHistoryService.cancelLeave(leaveId, principal.getName());
 
     }
 }

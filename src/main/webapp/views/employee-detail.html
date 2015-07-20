@@ -1,0 +1,42 @@
+<div class="container">
+    <h1>Employee Details</h1>
+
+    <form novalidate="novalidate" class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label">First name:</label>
+
+            <div class="controls">
+                {{employee.employeeName}}
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Last name:</label>
+
+            <div class="controls">
+                {{employee.employeeSurname}}
+            </div>
+        </div>
+        <div class="control-group">
+
+            <div class="control-group">
+                <label class="control-label">Leave Balance in hours:</label>
+
+                <div class="controls">
+                    {{employee.employeeBalance}}
+                </div>
+            </div>
+            </div>
+        <div class="control-group">
+
+            <div class="control-group">
+                <label class="control-label">Department:</label>
+
+                <div class="controls">
+                    {{employee.department.departmentName}}
+                </div>
+            </div>
+        </div>
+        <div class="control-group"></div>
+
+    </form>
+</div>
