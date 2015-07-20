@@ -15,6 +15,8 @@ public class EmployeeResponse {
         this.password = password;
     }
 
+    public EmployeeResponse() {
+    }
 
     public double getLeaveBalance() {
         return leaveBalance;

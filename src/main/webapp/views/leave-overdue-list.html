@@ -1,0 +1,22 @@
+<div class = "contianer" class="col-sm-6">
+    <table class="table table-bordered" >
+        <thead>
+        <tr>
+            <th style="min-width: 80px;">Month</th>
+            <th style="min-width: 80px;">Leave Days</th>
+            <th style="min-width: 80px;">Overdue Leave</th>
+            <th style="min-width: 80px;">Overdue</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="leave in leaveentries">
+            <td>{{leave.month}} {{leave.employee.employeeSurname}}</td>
+            <td>{{leave.leaveDays}}</td>
+            <td>{{leave.totalOverdueDays}}</td>
+            <td>{{leave.overdue === true ? "Overdue" : "Not Overdue"}}</td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,24 @@
+<div class = "contianer" class="col-sm-6">
+    <table class="table table-bordered" >
+        <thead>
+        <tr>
+            <th style="min-width: 80px;">First name</th>
+            <th style="min-width: 80px;">Last name</th>
+            <th style="min-width: 80px;">Username</th>
+            <th style="min-width: 80px;">Leave Balance (hours)</th>
+            <th style="width:20px;">&nbsp;</th>
+            <th style="width:20px;">&nbsp;</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="employee in allemployees">
+            <td>{{employee.employeeName}}</td>
+            <td>{{employee.employeeSurname}}</td>
+            <td>{{employee.username}}</td>
+            <td>{{employee.employeeBalance}}</td>
+            <td><a ng-click="viewEmployee(employee.employeeId)" class="btn btn-small btn-primary"> Details </a></td>
+            <td><a ng-click="viewEmployeeCredentials(employee.employeeId)" class="btn btn-small btn-primary">Credentials</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>

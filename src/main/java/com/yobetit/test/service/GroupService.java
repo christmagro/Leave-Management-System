@@ -1,7 +1,9 @@
 package com.yobetit.test.service;
 
 import com.yobetit.test.entities.DepartmentEntity;
+import com.yobetit.test.entities.GroupsEntity;
 import com.yobetit.test.repositories.DepartmentRepository;
+import com.yobetit.test.repositories.GroupRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,25 +15,25 @@ import java.util.List;
  * Created by Christian Magro on 14/07/2015.
  */
 @Service
-public class DepartmentService {
+public class GroupService {
 
     @Autowired
-    private DepartmentRepository departmentRepository;
+    private GroupRepository groupRepository;
 
-    public static final Logger log = Logger.getLogger(DepartmentService.class);
+    public static final Logger log = Logger.getLogger(GroupService.class);
 
     @Transactional(readOnly = true)
-    public List<DepartmentEntity> getDepartments() {
+    public List<GroupsEntity> getGroups() {
 
-        log.info("Received request to return list of all departments");
+        log.info("Received request to return list of all groups");
 
         try {
 
-            List<DepartmentEntity> departmentEntities = departmentRepository.findAll();
+            List<GroupsEntity> groupsEntities = groupRepository.findAll();
 
-            log.info("A total of " + departmentEntities.size() + " departments were returned ");
+            log.info("A total of " + groupsEntities.size() + " groups were returned ");
 
-            return departmentEntities;
+            return groupsEntities;
         } catch (Exception e) {
             log.error("Exception thrown ", e);
         }

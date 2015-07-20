@@ -1,0 +1,59 @@
+<div class="container">
+    <h1>Create a new Employee</h1>
+
+    <form novalidate="novalidate" class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label" for="inputFirstName">First name:</label>
+
+            <div class="controls">
+                <input type="text" id="inputFirstName" ng-model="employee.employeeName" placeholder="First name"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputLastName">Last name:</label>
+
+            <div class="controls">
+                <input type="text" id="inputLastName" ng-model="employee.employeeSurname" placeholder="Last name"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputLastName">Username:</label>
+
+            <div class="controls">
+                <input type="text" id="inputUsername" ng-model="employee.username" placeholder="Username"/>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="inputLastName">Depatments:</label>
+
+
+            <div class="controls">
+                <select name="inputDepartment" ng-model="employee.department.departmentId" >
+                    <option ng:repeat="department in allDepartments" value="{{department.departmentId}}">{{department.departmentName}}</option>
+                </select>
+            </div>
+
+        </div>
+
+
+        <div class="control-group">
+            <label class="control-label" for="inputLastName">Group:</label>
+
+
+            <div class="controls">
+                <select name="inputDepartment" ng-model="employee.group.groupId" >
+                    <option ng:repeat="group in allGroups" value="{{group.groupId}}">{{group.statusName}}</option>
+                </select>
+            </div>
+
+        </div>
+
+
+        <div class="control-group">
+            <div class="controls">
+                <a ng-click="createNewUser()" class="btn btn-small btn-primary">create new user</a>
+            </div>
+        </div>
+    </form>
+</div>
