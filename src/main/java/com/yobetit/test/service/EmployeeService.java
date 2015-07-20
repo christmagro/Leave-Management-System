@@ -73,6 +73,30 @@ public class EmployeeService {
         return null;
     }
 
+    @Transactional(readOnly = true)
+    public EmployeeResponse getEmployeeCredentials(int employeeId) {
+
+        log.info("Received request to return employee with id: " + employeeId);
+        try {
+            EmployeeEntity employeeEntity = employeeRepository.findOne(employeeId);
+            EmployeeResponse employee = new EmployeeResponse();
+
+
+            employee.setUsername(employeeEntity.getUsername());
+            employee.setPassword(employeeEntity.getPassword());
+
+            log.info("Request for Employee credentials with id: " + employeeId + " was successful");
+
+            return employee;
+        } catch (Exception e) {
+            log.error("Exception thrown ", e);
+        }
+
+        return null;
+    }
+
+
+
 
     @Transactional(readOnly = true)
     public List<Employee> getEmployees() {
@@ -100,6 +124,33 @@ public class EmployeeService {
             log.info("A total of " + employeeList.size() + " employees were returned ");
 
             return employeeList;
+        } catch (Exception e) {
+            log.error("Exception thrown ", e);
+        }
+
+        return null;
+    }
+
+    @Transactional(readOnly = true)
+    public Employee getEmployeeDetails(String username) {
+
+        log.info("Received request to return employee with id: " + username);
+        try {
+            EmployeeEntity employeeEntity = employeeRepository.findByUsername(username);
+            DepartmentEntity departmentEntity = departmentRepository.findOne(employeeEntity.getDepartment().getDepartmentId());
+
+            Employee employee = new Employee();
+
+            employee.setEmployeeName(employeeEntity.getEmployeeName());
+            employee.setEmployeeSurname(employeeEntity.getEmployeeSurname());
+            employee.setEmployeeBalance(employeeEntity.getEmployeeBalance());
+            employee.setDepartment(departmentEntity);
+            employee.setUsername(employeeEntity.getUsername());
+
+
+            log.info("Request for Employee details with username " + username + " was successful");
+
+            return employee;
         } catch (Exception e) {
             log.error("Exception thrown ", e);
         }

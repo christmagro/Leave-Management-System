@@ -1,0 +1,25 @@
+<div class = "contianer" class="col-sm-6">
+    <table class="table table-bordered" >
+        <thead>
+        <tr>
+            <th style="min-width: 80px;">Employee</th>
+            <th style="min-width: 80px;">Leave Hours</th>
+            <th style="min-width: 80px;">Request Date</th>
+            <th style="min-width: 80px;">Start Date</th>
+            <th style="min-width: 80px;">Leave Status</th>
+            <th style="min-width: 80px;">Cancel Leave</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="leave in leaveentries">
+            <td>{{leave.employee.employeeName}} {{leave.employee.employeeSurname}}</td>
+            <td>{{leave.hours}}</td>
+            <td>{{leave.requestDate | date:'MM/dd/yyyy @ h:mma'}}</td>
+            <td>{{leave.startDate | date : format : timezone}}</td>
+            <td>{{leave.status.statusName}}</td>
+            <td><a  ng-click="cancelLeave(leave.leavehistoryId)" class="btn btn-small btn-danger">Cancel</a></td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>

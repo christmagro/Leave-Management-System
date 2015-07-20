@@ -1,0 +1,67 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:security="http://www.springframework.org/schema/security"
+             xsi:schemaLocation="
+    	http://www.springframework.org/schema/beans
+    	http://www.springframework.org/schema/beans/spring-beans.xsd
+
+        http://www.springframework.org/schema/security
+        http://www.springframework.org/schema/security/spring-security.xsd">
+
+
+    <beans:bean id="dataSourceSecurity" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+
+        <beans:property name="driverClassName" value="${spring.datasource.driver-class-name}"/>
+        <beans:property name="url" value="${spring.datasource.url}"/>
+        <beans:property name="username" value="${spring.datasource.username}"/>
+        <beans:property name="password" value="${spring.datasource.password}"/>
+    </beans:bean>
+
+
+    <security:http auto-config="true" use-expressions="true">
+
+        <security:intercept-url pattern="/v1/employee/getEmployee/*" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/v1/employee/getAll" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/v1/employee/add" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/v1/department/getAll" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/v1/group/getAll" access="hasRole('ROLE_ADMIN')"/>
+
+        <security:intercept-url pattern="/v1/leave/getAll" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/v1/leave/getAllByManager" access="isAuthenticated()"/>
+        <security:intercept-url pattern="/v1/leave/getPassedLeaveByEmployee" access="isAuthenticated()"/>
+        <security:intercept-url pattern="/v1/leave/getFutureLeaveByEmployee" access="isAuthenticated()"/>
+        <security:intercept-url pattern="/v1/leave/getCancelledLeaveByEmployee" access="isAuthenticated()"/>
+        <security:intercept-url pattern="/v1/leave/getOverdueLeaveByEmployee" access="isAuthenticated()"/>
+        <security:intercept-url pattern="/v1/leave/delete/*" access="isAuthenticated()"/>
+        <security:intercept-url pattern="/v1/leave/add" access="isAuthenticated()"/>
+        <security:intercept-url pattern="/v1/leave/getEmployeeByUsername" access="isAuthenticated()"/>
+        <security:intercept-url pattern="/v1/leave/getCurrentMonthLeave" access="hasRole('ROLE_ADMIN')"/>
+
+
+        <security:session-management>
+            <security:concurrency-control max-sessions="1" expired-url="/sessionExpired"/>
+        </security:session-management>
+        <security:logout logout-url="/j_spring_security_logout" invalidate-session="true" logout-success-url="/login"/>
+
+
+        <security:http-basic/>
+    </security:http>
+
+
+    <authentication-manager>
+        <authentication-provider>
+            <jdbc-user-service data-source-ref="dataSourceSecurity"
+
+                               users-by-username-query="SELECT USERNAME, PASSWORD, CASE ENABLED WHEN 1 THEN 'true' ELSE 'false' END 'ENABLED'
+         FROM TBL_EMPLOYEE
+         WHERE USERNAME=?"
+                               authorities-by-username-query="select e.username, g.status_name from tbl_employee e left join tbl_groups g on e.group_id = g.group_id where e.username=?"
+
+                    />
+
+        </authentication-provider>
+    </authentication-manager>
+
+
+</beans:beans>
