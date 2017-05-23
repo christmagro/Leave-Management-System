@@ -1,9 +1,9 @@
-# YoBetit Leave Test
+# Leave Management System
 A Leave module project created using Spring MVC &amp; Spring Data
 
 This Application exposes a Rest Layer that accepts and returns messages is JSON format.
 
-##System Main features consist in the following:
+## System Main features consist in the following:
 
 - Adding New users including returning random password generation and automated leave allocation based on the remaining days of the year.
 - Leave booking and cancellation, with automated leave deduction(leave application) and added (leave cancellation) based on the action. If leave balance is not enough leave entry will not be succesfull.
@@ -15,15 +15,15 @@ This Application exposes a Rest Layer that accepts and returns messages is JSON 
 - Leave listings of all employee leave applications for the current month.
 
 
-##Availble Actions URLS
+## Availble Actions URLS
 
-###Employee Related Actions
+### Employee Related Actions
 
 * /v1/employee/getEmployee/{id}  (Method Get) Returns a particular Employee by userID (for testing purposes use 1 as ID).
 * /v1/employee/getAll            (Method Get) Returns a complete list of all Employees.
 * /v1/employee/add               (Method Post) Accepts a post in JSON format containing all employee Data.
 
-###Sample Add Employee Request (JSON)
+### Sample Add Employee Request (JSON)
 '''json
 {
     "employeeName": "foo",
@@ -39,7 +39,7 @@ This Application exposes a Rest Layer that accepts and returns messages is JSON 
 }
 '''
 
-###Leave Related Actions
+### Leave Related Actions
 
 * /v1/leave/getAll            (Method Get) Returns a list of leave entries for all users.
 * /v1/leave/getAllByManager   (Method Get) Returns a list of leave entries for the current managers department employees ((based on the manager's username)).
