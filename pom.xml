@@ -10,11 +10,11 @@
     <packaging>war</packaging>
 
     <properties>
-        <spring.version>4.2.0.RELEASE</spring.version>
+        <spring.version>4.3.18.RELEASE</spring.version>
         <spring.data.version>1.8.1.RELEASE</spring.data.version>
         <spring.security.version>3.1.0.RELEASE</spring.security.version>
         <jackson.version>1.9.10</jackson.version>
-        <jackson.databind-version>2.2.2</jackson.databind-version>
+        <jackson.databind-version>2.9.7</jackson.databind-version>
         <hibernate.version>4.3.5.Final</hibernate.version>
         <mysql.version>5.1.6</mysql.version>
     </properties>
